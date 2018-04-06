@@ -2,7 +2,6 @@
 #include<string.h>
 using namespace std;
 
-
 class String {
 public:
 	String(const char* str);
