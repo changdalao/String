@@ -141,15 +141,12 @@ void String::Insert(size_t pos, char ch)
 {
 	if (_size >= _capacity)
 		Expand(_capacity * 2);
-	int tmp = _size;
-	while (pos != _size)
+	for (int i = _size; i >=(int)pos; i--)//切记强转为int，否则死循环
 	{
-		_str[_size + 1] = _str[_size];
-		_size--;
+		_str[i + 1] = _str[i];
 	}
-	_str[_size + 1] = _str[_size];
-	_str[_size] = ch;
-	_size = tmp + 1;
+	_str[pos] = ch;
+	_str[++_size] = '\0';
 }
 
 void String::Insert(size_t pos, const char* str)
