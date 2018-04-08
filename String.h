@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string.h>
+#include<assert.h>
 using namespace std;
 
 class String {
@@ -151,19 +152,17 @@ void String::Insert(size_t pos, char ch)
 
 void String::Insert(size_t pos, const char* str)
 {
+	assert(pos < _size);
 	if (_size + strlen(str) >= _capacity)
-		Expand(_capacity + _size + strlen(str));
-	size_t size = _size;
+		Expand( _size + strlen(str));
 	size_t len = strlen(str);
-	while (pos != size)
+	for (int i = _size; i >= (int)pos; i--)
 	{
-		_str[size + strlen(str)] = _str[size];
-		size--;
+		_str[i + len] = _str[i];
 	}
-	_str[size + strlen(str)] = _str[size];
-	while (*str)					
-		_str[size++] = *str++;
-	_size +=len;
+	while (*str)
+		_str[pos++] = *str++;
+	_size += len;
 }
 
 void String::Erase(size_t pos, size_t n )
