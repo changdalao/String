@@ -18,8 +18,8 @@ public:
 	void Erase(size_t pos, size_t n );
 	size_t Find(char ch);
 	size_t Find(const char* str);
-	void operator+(const char ch);
-	void operator+(const char* str);
+	String& operator+(const char ch);
+	String& operator+(const char* str);
 	bool operator>(const String& s);
 	bool operator<(const String& s);
 	bool operator>=(const String& s);
@@ -98,14 +98,16 @@ void String::PushBack(const char* str = "")
 	_size += strlen(str);
 }
 
-void String::operator+(const char ch)
+String& String::operator+(const char ch)
 {
 	PushBack(ch);
+	return *this;
 }
 
-void String::operator+(const char* str)
+String& String::operator+(const char* str)
 {
 	PushBack(str);
+	return *this;
 }
 
 bool String::operator>(const String& s)
